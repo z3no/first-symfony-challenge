@@ -17,4 +17,14 @@ class LearningController extends AbstractController
             'text' => $someText,
         ]);
     }
+
+    #[Route('/')]
+    public function showMyName() : Response
+    {
+        $name = 'Unknown';
+
+        return $this->render('base.html.twig', [
+            'name' => $name,
+        ]);
+    }
 }
