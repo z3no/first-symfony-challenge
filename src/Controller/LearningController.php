@@ -3,9 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\Type\UserProfileType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,18 +22,12 @@ class LearningController extends AbstractController
     }
 
     #[Route('/')]
-    public function showMyName() : Response
+    public function showMyName(Request $request) : Response
     {
         $user = new User();
         $name = $user->getName();
 
-        $form = $this->createFormBuilder($user)
-//            ->setAction($this->generateUrl('/change-my-name'))
-//            ->setMethod('POST')
-            ->add('name', TextType::class)
-            ->add('Submit', SubmitType::class, ['label' => 'Change user name'])
-            ->getForm();
-
+        $form = $this->createForm(UserProfileType::class, $user);
 
         return $this->renderForm('base.html.twig', [
             'name' => $name,
