@@ -39,10 +39,10 @@ So first let's derive from our path, and prepare ourselves. We did this by getti
 This prep will help us get across this hallway! Now let's create our own `Controller` and enter this long scary hallway without a hall-pass.
 
 - TO DO:
-    - [ ] create a controller called: `LearningController`, we can use the command `bin/console make:controller`.
-    - [ ] create a method called `aboutMe`. This page should contain some text and no further functionality.
-    - [ ] the page should be reachable by adding `/about-me` to the url
-    - [ ] use Twig 🌿
+    - [x] create a controller called: `LearningController`, we can use the command `bin/console make:controller`.
+    - [x] create a method called `aboutMe`. This page should contain some text and no further functionality.
+    - [x] the page should be reachable by adding `/about-me` to the url
+    - [x] use Twig 🌿
 
 ### Phase 3:
 
