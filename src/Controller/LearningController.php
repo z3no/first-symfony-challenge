@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\Type\UserProfileType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,7 @@ class LearningController extends AbstractController
     public function aboutMe(): Response
     {
         $someText = 'Hey this is some text, you can use your imagination. Fill it in some more, lorem ipsum and all.';
+        $name = 'unknown';
 
         return $this->render('aboutme.html.twig', [
             'text' => $someText,
@@ -35,23 +37,28 @@ class LearningController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted() && $form->isValid())
+        {
             $name = $user->getName();
+            return $this->render('aboutme.html.twig', [
+                'name' => $name,
+            ]);
         }
 
-        return $this->renderForm('base.html.twig', [
+        return $this->render('base.html.twig', [
             'name' => $name,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/change-my-name', name: 'change_my_name')]
-    public function changeMyName(Request $request) : RedirectResponse
-    {
-        $user = new User();
-        $newName = $request->request->get('name');
-        $user->setName($newName);
-
-        return $this->redirectToRoute('show_my_name');
-    }
+//    #[Route('/change-my-name', name: 'change_my_name')]
+//    public function changeMyName() : Response
+//    {
+//        $user = new User();
+//        $name = $user->getName();
+//
+//        return $this->render('base.html.twig', [
+//            'name' => $name,
+//        ]);
+//    }
 }
