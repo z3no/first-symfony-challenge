@@ -4,7 +4,7 @@ namespace App\Entity;
 
 class User
 {
-    private $name = 'Unknown';
+    private $name = 'Dunno know?';
 
     /**
      * @return string
